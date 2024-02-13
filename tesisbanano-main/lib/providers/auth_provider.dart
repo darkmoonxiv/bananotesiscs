@@ -1,13 +1,13 @@
 import 'dart:convert';
+
 import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:admin_dashboard/models/htpp/auth_response.dart';
-import 'package:admin_dashboard/services/notification_service.dart';
-import 'package:http/http.dart' as http;
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
-
+import 'package:admin_dashboard/services/notification_service.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
@@ -24,7 +24,8 @@ class AuthProvider extends ChangeNotifier {
   }
 
   login(String email, String password) async {
-    final url = Uri.parse('http://localhost:4000/v1/auth/signin');
+    final url =
+        Uri.parse('https://core.tesisgestionbananoec.com/v1/auth/signin');
     final data = {
       'email': email,
       'password': password,
@@ -86,7 +87,8 @@ class AuthProvider extends ChangeNotifier {
   }
 
   ressetPassword(String email) async {
-    final url = Uri.parse('http://localhost:4000/v1/auth/reset-password');
+    final url = Uri.parse(
+        'https://core.tesisgestionbananoec.com/v1/auth/reset-password');
     final data = {
       'email': email,
     };
@@ -108,8 +110,8 @@ class AuthProvider extends ChangeNotifier {
   }
 
   changedPassword(String password, String token) async {
-    final url =
-        Uri.parse('http://localhost:4000/v1/auth/reset-password/$token');
+    final url = Uri.parse(
+        'https://core.tesisgestionbananoec.com/v1/auth/reset-password/$token');
     final data = {
       'password': password,
     };
@@ -146,8 +148,9 @@ class AuthProvider extends ChangeNotifier {
         'Content-Type': 'application/json',
       };
 
-      final response = await http
-          .get(Uri.parse('http://localhost:4000/v1/auth'), headers: headers);
+      final response = await http.get(
+          Uri.parse('https://core.tesisgestionbananoec.com/v1/auth'),
+          headers: headers);
 
       final responseBody = response.body;
       final parsedResponse = json.decode(responseBody);
@@ -205,7 +208,7 @@ class AuthProvider extends ChangeNotifier {
     String lastName,
     String email,
   ) async {
-    final url = 'http://localhost:4000/v1/auth/info';
+    final url = 'https://core.tesisgestionbananoec.com/v1/auth/info';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     if (!this._validForm()) {
@@ -243,7 +246,7 @@ class AuthProvider extends ChangeNotifier {
     String password,
     String newPassword,
   ) async {
-    final url = 'http://localhost:4000/v1/auth/update-password';
+    final url = 'https://core.tesisgestionbananoec.com/v1/auth/update-password';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     if (!this._validForm2()) {

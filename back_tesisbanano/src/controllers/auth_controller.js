@@ -54,7 +54,7 @@ const signin = async (req, res, next) => {
           ],
         },
       ],
-    });
+    }).catch((e) => {console.log(e)});
 
     if (!user) {
       throw new NotFound('User not found');

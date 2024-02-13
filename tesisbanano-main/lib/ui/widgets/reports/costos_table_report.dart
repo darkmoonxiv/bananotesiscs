@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:universal_html/html.dart' as html;
-import 'package:pdf/widgets.dart' as pw;
-import 'package:pdf/pdf.dart';
-
+import 'package:admin_dashboard/datatables/rentabilidad_datasource.dart';
 import 'package:admin_dashboard/models/costos.dart';
 import 'package:admin_dashboard/models/rentabilidad.dart';
-
-import 'package:provider/provider.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
-
-import 'package:admin_dashboard/datatables/rentabilidad_datasource.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
+import 'package:universal_html/html.dart' as html;
 
 class CostosTableReport extends StatefulWidget {
   final String nombreReporte; // Parámetro de clase
@@ -41,7 +37,7 @@ class _CostosTableReportState extends State<CostosTableReport> {
           alignment: Alignment.topCenter,
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Container(
+            child: SizedBox(
                 width: MediaQuery.of(context).size.width *
                     0.4, // Ajusta el ancho del contenedor según tus necesidades
                 child: IconButton(
@@ -97,8 +93,10 @@ void generateAndDownloadPdfRentCosto(
 
   final ByteData imageLeftData =
       await rootBundle.load('assets/logo_pdfFruty.jpeg');
-  final ByteData imageCenterData = await rootBundle.load('/seguimientoS.jpeg');
-  final ByteData imageRightData = await rootBundle.load('/logo_pdfImagen.jpeg');
+  final ByteData imageCenterData =
+      await rootBundle.load('assets/seguimientoS.jpeg');
+  final ByteData imageRightData =
+      await rootBundle.load('assets/logo_pdfImagen.jpeg');
 
   final Uint8List imageLeftBytes = imageLeftData.buffer.asUint8List();
   final Uint8List imageCenterBytes = imageCenterData.buffer.asUint8List();
@@ -171,19 +169,19 @@ void generateAndDownloadPdfRentCosto(
         return pw.TableRow(
           children: [
             pw.Container(
-             color: esRentable ? PdfColors.green100 : PdfColors.red100,
+              color: esRentable ? PdfColors.green100 : PdfColors.red100,
               alignment: pw.Alignment.center,
               child: pw.Text(
                 renta.id.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
-             color: esRentable ? PdfColors.green100 : PdfColors.red100,
+              color: esRentable ? PdfColors.green100 : PdfColors.red100,
               alignment: pw.Alignment.center,
               child: pw.Text(
                 renta.planningSowing2.batchNumber.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -193,21 +191,15 @@ void generateAndDownloadPdfRentCosto(
                 (renta.planningSowing2.numberOfBunches -
                         renta.planningSowing2.rejectedBunches)
                     .toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
               color: esRentable ? PdfColors.green100 : PdfColors.red100,
               alignment: pw.Alignment.center,
               child: pw.Text(
-                ((renta.planningSowing2.averageBunchWeight *
-                            (renta.planningSowing2.numberOfBunches -
-                                renta.planningSowing2.rejectedBunches) /
-                            1000))
-                        .toStringAsFixed(2) +
-                    "KG",
-                style: pw.TextStyle(
-                  fontSize: 10),
+                "${((renta.planningSowing2.averageBunchWeight * (renta.planningSowing2.numberOfBunches - renta.planningSowing2.rejectedBunches) / 1000)).toStringAsFixed(2)}KG",
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -222,7 +214,7 @@ void generateAndDownloadPdfRentCosto(
                             1000)
                         .toStringAsFixed(2) +
                     "LB",
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -297,7 +289,6 @@ void generateAndDownloadPdfRentCosto(
                 style:
                     pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold)),
           ),
-
         ],
       ),
       ...costos.map((costo) {
@@ -308,7 +299,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.id.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -316,7 +307,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.description,
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -324,7 +315,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.labor.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             /*pw.Container(
@@ -340,7 +331,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.fuel.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -348,7 +339,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.input.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -356,7 +347,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.id.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
             pw.Container(
@@ -364,7 +355,7 @@ void generateAndDownloadPdfRentCosto(
               alignment: pw.Alignment.center,
               child: pw.Text(
                 costo.totalCosts.toString(),
-                style: pw.TextStyle(fontSize: 10),
+                style: const pw.TextStyle(fontSize: 10),
               ),
             ),
           ],
@@ -391,7 +382,7 @@ void generateAndDownloadPdfRentCosto(
           alignment: pw.Alignment.centerRight,
           child: pw.Text(
               'Página ${context.pageNumber} de ${context.pagesCount}',
-              style: pw.TextStyle(fontSize: 12)),
+              style: const pw.TextStyle(fontSize: 12)),
         );
       },
       build: (pw.Context context) {

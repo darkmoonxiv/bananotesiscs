@@ -89,9 +89,9 @@ class _InvetoryTableReportState extends State<InvetoryTableReport> {
     final ByteData imageLeftData =
         await rootBundle.load('assets/logo_pdfFruty.jpeg');
     final ByteData imageCenterData =
-        await rootBundle.load('/seguimientoS.jpeg');
+        await rootBundle.load('assets/seguimientoS.jpeg');
     final ByteData imageRightData =
-        await rootBundle.load('/logo_pdfImagen.jpeg');
+        await rootBundle.load('assets/logo_pdfImagen.jpeg');
 
     final Uint8List imageLeftBytes = imageLeftData.buffer.asUint8List();
     final Uint8List imageCenterBytes = imageCenterData.buffer.asUint8List();

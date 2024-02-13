@@ -6,7 +6,7 @@ class CafeApi {
 
 static void configureDio() async {
   // Base del URL
-  _dio.options.baseUrl = 'http://localhost:4000/v1';
+  _dio.options.baseUrl = 'https://core.tesisgestionbananoec.com/v1';
 
   // Obtener el token desde el LocalStorage
   String? token = LocalStorage.prefs.getString('token');

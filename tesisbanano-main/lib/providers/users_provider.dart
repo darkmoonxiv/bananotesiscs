@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
-import 'package:admin_dashboard/models/usuario.dart';
-import 'package:admin_dashboard/models/roles.dart';
-import 'package:admin_dashboard/models/rolesPermisos.dart';
 import 'package:admin_dashboard/models/costos.dart';
 import 'package:admin_dashboard/models/inventario.dart';
 import 'package:admin_dashboard/models/parametrizacion.dart';
 import 'package:admin_dashboard/models/permisos.dart';
 import 'package:admin_dashboard/models/rentabilidad.dart';
+import 'package:admin_dashboard/models/roles.dart';
+import 'package:admin_dashboard/models/rolesPermisos.dart';
 import 'package:admin_dashboard/models/tipoReporte.dart';
-
+import 'package:admin_dashboard/models/usuario.dart';
 //import 'package:admin_dashboard/services/notification_service.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/notification_service.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class UsersProvider extends ChangeNotifier {
   List<Usuario> users = [];
@@ -54,7 +53,7 @@ class UsersProvider extends ChangeNotifier {
   //Obtener los usuarios
   getPaginatedUsers() async {
     users.clear();
-    const url = 'http://localhost:4000/v1/users';
+    const url = 'https://core.tesisgestionbananoec.com/v1/users';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -105,7 +104,7 @@ class UsersProvider extends ChangeNotifier {
   //Obtener roles
   getRoles() async {
     roles.clear();
-    const url = 'http://localhost:4000/v1/roles';
+    const url = 'https://core.tesisgestionbananoec.com/v1/roles';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -146,7 +145,7 @@ class UsersProvider extends ChangeNotifier {
     int rol,
     int idUser,
   ) async {
-    final url = 'http://localhost:4000/v1/users/$idUser';
+    final url = 'https://core.tesisgestionbananoec.com/v1/users/$idUser';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -191,7 +190,7 @@ class UsersProvider extends ChangeNotifier {
     String password,
     int rol,
   ) async {
-    final url = 'http://localhost:4000/v1/users';
+    final url = 'https://core.tesisgestionbananoec.com/v1/users';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -234,7 +233,7 @@ class UsersProvider extends ChangeNotifier {
   Future<void> deleteUser(
     int idUser,
   ) async {
-    final url = 'http://localhost:4000/v1/users/$idUser';
+    final url = 'https://core.tesisgestionbananoec.com/v1/users/$idUser';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final headers = {
@@ -257,7 +256,7 @@ class UsersProvider extends ChangeNotifier {
 
   getPermisos() async {
     permisos.clear();
-    final url = 'http://localhost:4000/v1/permissions';
+    final url = 'https://core.tesisgestionbananoec.com/v1/permissions';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -292,7 +291,8 @@ class UsersProvider extends ChangeNotifier {
     permisosRol.clear();
     this.rolPermiso = id;
 
-    final url = 'http://localhost:4000/v1/roles/$id/permissions';
+    final url =
+        'https://core.tesisgestionbananoec.com/v1/roles/$id/permissions';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -329,7 +329,7 @@ class UsersProvider extends ChangeNotifier {
     int id,
   ) async {
     if (rolPermiso == 0) return;
-    final url = 'http://localhost:4000/v1/roles/$rolPermiso';
+    final url = 'https://core.tesisgestionbananoec.com/v1/roles/$rolPermiso';
     final token = LocalStorage.prefs.getString('token') ?? '';
     List<int> permisosR = [];
     if (aggOrDelete == true) {
@@ -373,7 +373,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   getRolesPermisos() async {
-    const url = 'http://localhost:4000/v1/roles/findR';
+    const url = 'https://core.tesisgestionbananoec.com/v1/roles/findR';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -408,7 +408,7 @@ class UsersProvider extends ChangeNotifier {
   Future<void> deleteParametrizacion(
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/planning-sowing/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/planning-sowing/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final headers = {
@@ -432,7 +432,7 @@ class UsersProvider extends ChangeNotifier {
 
   getSiembra() async {
     parametrizacion.clear();
-    final url = 'http://localhost:4000/v1/planning-sowing';
+    final url = 'https://core.tesisgestionbananoec.com/v1/planning-sowing';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -480,7 +480,7 @@ class UsersProvider extends ChangeNotifier {
     int numLote,
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/planning-sowing/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/planning-sowing/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -535,7 +535,7 @@ class UsersProvider extends ChangeNotifier {
     int rechazadosB,
     int numLote,
   ) async {
-    final url = 'http://localhost:4000/v1/planning-sowing';
+    final url = 'https://core.tesisgestionbananoec.com/v1/planning-sowing';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -579,7 +579,7 @@ class UsersProvider extends ChangeNotifier {
 
   getCostos() async {
     costos.clear();
-    final url = 'http://localhost:4000/v1/cost-records';
+    final url = 'https://core.tesisgestionbananoec.com/v1/cost-records';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -614,7 +614,7 @@ class UsersProvider extends ChangeNotifier {
 
   Future<void> putUpdateCostos(String descripcion, double manoO,
       double combustible, double sumaTotal, double total, int id) async {
-    final url = 'http://localhost:4000/v1/cost-records/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/cost-records/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
     final double insumo = sumaTotal;
     double tInsumo = insumo + total;
@@ -647,7 +647,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   Future<double> getInventarioXid(int id) async {
-    final url = 'http://localhost:4000/v1/inventory/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/inventory/$id';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -686,7 +686,7 @@ class UsersProvider extends ChangeNotifier {
   Future<void> deleteCostos(
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/cost-records/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/cost-records/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final headers = {
@@ -716,7 +716,7 @@ class UsersProvider extends ChangeNotifier {
     double sumaTotal,
     double total,
   ) async {
-    final url = 'http://localhost:4000/v1/cost-records';
+    final url = 'https://core.tesisgestionbananoec.com/v1/cost-records';
     final token = LocalStorage.prefs.getString('token') ?? '';
     final double insumo = sumaTotal;
     double tInsumo = insumo + total;
@@ -754,7 +754,7 @@ class UsersProvider extends ChangeNotifier {
 
   getInventario() async {
     inventario.clear();
-    final url = 'http://localhost:4000/v1/inventory';
+    final url = 'https://core.tesisgestionbananoec.com/v1/inventory';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -797,7 +797,7 @@ class UsersProvider extends ChangeNotifier {
     int cantidad,
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/inventory/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/inventory/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -834,7 +834,7 @@ class UsersProvider extends ChangeNotifier {
   Future<void> deleteInventario(
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/inventory/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/inventory/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final headers = {
@@ -864,7 +864,7 @@ class UsersProvider extends ChangeNotifier {
     double precio,
     int cantidad,
   ) async {
-    final url = 'http://localhost:4000/v1/inventory';
+    final url = 'https://core.tesisgestionbananoec.com/v1/inventory';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {
@@ -902,7 +902,7 @@ class UsersProvider extends ChangeNotifier {
 
   getRentabilidad() async {
     rentabilidad.clear();
-    final url = 'http://localhost:4000/v1/profitability';
+    final url = 'https://core.tesisgestionbananoec.com/v1/profitability';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
@@ -939,7 +939,7 @@ class UsersProvider extends ChangeNotifier {
     int costos,
     int planing,
   ) async {
-    final url = 'http://localhost:4000/v1/profitability';
+    final url = 'https://core.tesisgestionbananoec.com/v1/profitability';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final data = {"costRecordId": costos, "planningSowing2Id": planing};
@@ -969,7 +969,7 @@ class UsersProvider extends ChangeNotifier {
   Future<void> deleteRentabilidad(
     int id,
   ) async {
-    final url = 'http://localhost:4000/v1/profitability/$id';
+    final url = 'https://core.tesisgestionbananoec.com/v1/profitability/$id';
     final token = LocalStorage.prefs.getString('token') ?? '';
 
     final headers = {
@@ -991,7 +991,7 @@ class UsersProvider extends ChangeNotifier {
   //------------------------------- Reporte ------------------------------
   getTipoReporte() async {
     reporteTipos.clear();
-    final url = 'http://localhost:4000/v1/reports/types';
+    final url = 'https://core.tesisgestionbananoec.com/v1/reports/types';
     final token = LocalStorage.prefs.getString('token') ??
         ''; // Replace with your saved token
 
